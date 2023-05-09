@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Blog.Title}}</title>
+    <link rel="stylesheet" href="/public/css/style-blog-detail.css">
+
+    <!-- cdn bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <!-- cdn font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        .ms-lg-4{margin-left:2rem!important}
+
+        .before::before {
+            content: "";
+        }
+
+        .fa-node, .fa-react, .fa-golang, .fa-python {
+            display: block !important;
+        } 
+    </style>
+</head>
+<body class="bg-secondary-subtle overflow-x-hidden">
+
+    <!-- Navigasi Bar -->
+    <nav class="navbar navbar-expand-lg bg-body position-fixed container-fluid z-3">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand ms-3 me-5" href="https://dumbways.id/" style="display: inline-block;">
+                <img src="/public/images/logo.png" alt="Dumbways.ID">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+                    <li class="nav-item me-lg-4 bg-lg">
+                        <a class="nav-link text-dark" aria-current="page" href="/home">Home</a>
+                    </li>
+                    {{if .Flash.FlashIsLogin}}
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="/blog">Add Project</a>
+                    </li>
+                    {{else}}
+                    <div></div>
+                    {{end}}
+                </ul>
+                
+                <ul class="navbar-nav me-lg-4">
+                    {{if .Flash.FlashIsLogin}}
+                    <li class="nav-item me-lg-4">
+                        <a href="/login" class="nav-link text-dark">Hello, {{.Flash.FlashName}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link text-dark">Logout</a>
+                    </li>
+                    {{else}}
+                    <li class="nav-item me-lg-4">
+                        <a href="/login" class="nav-link text-dark">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/register" class="nav-link text-dark">Register</a>
+                    </li>
+                    {{end}}
+                </ul>
+                <button right class="btn btn-outline-dark me-3 shadow-hover" type="button">
+                    <a href="/contact" class="text-dark text-decoration-none">contact me</a>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navigasi Bar -->
+
+    <!-- container -->
+    <div class="container-fluid row vw-100 m-auto pt-5">
+        <!-- container-in -->
+        <div class="container col-11 bg-white mt-4 p-4 rounded-4 mepet">
+            <h1 class="text-center mt-4">{{.Blog.Title}}</h1>
+            <!-- header -->
+            <div class="header row px-3 mt-5 justify-content-md-center" style="gap: 2rem;">
+                <div class="col-md-6">
+                    <img src="/upload/{{.Blog.Image}}" alt="computer" class="w-100">
+                </div>
+                <!-- information -->
+                <div class="information col-md-5 p">
+                    <h3>Duration</h3>
+                    <!-- duration -->
+                    <div class="date">
+                        <div class="mb-2">
+                            <i class="fa-solid fa-calculator me-3"></i>
+                            <p class="d-inline">{{.Blog.StartDateConv}} - {{.Blog.EndDateConv}}</p> 
+                        </div>
+                            <!-- -->
+                        <div>
+                            <i class="fa-solid fa-clock me-3"></i>
+                            <p class="d-inline">{{.Blog.Distance}} / {{.Blog.Day}} Day</p>
+                        </div>
+                    </div>
+
+                    <!-- technology -->
+                    <h3 class="mt-5">Technologies</h3>
+                    <div class="techno d-flex flex-wrap mt-3" style="gap: 2rem;">
+                        <i class="fa-brands {{index .Blog.Technology 0}} fs-4 flex-fill" style="display: none; width: 5rem">
+                            <p class="mt-1">NODE JS</p>
+                        </i>
+                        <i class="fa-brands {{index .Blog.Technology 1}} fs-4 flex-fill" style="display: none;">
+                            <p class="mt-1">REACT JS</p>
+                        </i>
+                        <i class="fa-brands {{index .Blog.Technology 2}} fs-4 flex-fill" style="display: none;">
+                            <p class="mt-1">GOLANG</p>
+                        </i>
+                        <i class="fa-brands {{index .Blog.Technology 3}} fs-4 flex-fill" style="display: none;">
+                            <p class="mt-1">PYTHON</p>
+                        </i>
+                    </div>
+                    <i class="fa-solid fa-user mt-3 fs-5">
+                        <p class="d-inline ">Author : {{.Blog.Author}}</p>
+                    </i>
+                    <p class="mt-3 fs-6"></p>
+                </div>
+            </div>
+            <div class="body p-5">
+                <p>{{.Blog.Description}}</p>
+            </div>
+        </div>
+    </div>
+    <!-- end container -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</body>
+</html>

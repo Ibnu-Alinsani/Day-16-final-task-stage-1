@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <!-- cdn bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <!-- My Css -->
+    <link rel="stylesheet" href="../public/css/style-login.css">
+</head>
+<body class="bg-secondary-subtle pt-5 pb-5" style="overflow-x: hidden;">
+    <!-- Navigasi Bar -->
+    <nav class="navbar navbar-expand-lg bg-body position-fixed container-fluid z-3">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand ms-3 me-5" href="https://dumbways.id/" style="display: inline-block;">
+                <img src="/public/images/logo.png" alt="Dumbways.ID">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+                    <li class="nav-item me-lg-4 bg-lg">
+                        <a class="nav-link text-dark" aria-current="page" href="/home">Home</a>
+                    </li>
+                    {{if .Flash.FlashIsLogin}}
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="/blog">Add Project</a>
+                    </li>
+                    {{else}}
+                    <div></div>
+                    {{end}}
+                </ul>
+                
+                <ul class="navbar-nav me-lg-4">
+                    {{if .Flash.FlashIsLogin}}
+                    <li class="nav-item me-lg-4">
+                        <a href="/login" class="nav-link text-dark">Hello, {{.Flash.FlashName}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link text-dark">Logout</a>
+                    </li>
+                    {{else}}
+                    <li class="nav-item me-lg-4">
+                        <a href="/login" class="nav-link text-dark">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/register" class="nav-link text-dark">Register</a>
+                    </li>
+                    {{end}}
+                </ul>
+                <button right class="btn btn-outline-dark me-3 shadow-hover" type="button">
+                    <a href="/contact" class="text-dark text-decoration-none">contact me</a>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navigasi Bar -->
+
+    {{if .FlashMessage}}
+    {{if .FlashStatus}}
+        <div class="alert alert-success text-center mt-2" style="margin: .65rem 0 -3rem !important;" role="alert">
+            {{.FlashMessage}}
+        </div>
+    {{else}}
+        <div></div> 
+    {{end}}
+    {{end}}
+    <section class="container-fluid h-100 pt-lg-4 pt-5 px-5">
+
+        <h2 class="text-center mb-5 mt-md-5">LOGIN TO YOUR ACCOUNT</h2>
+        <form action="/login" method="POST" class="col-lg-4 col-md-8 m-auto">
+            {{if .FlashMessage}}
+            {{if .FlashStatus}}
+                <div></div>
+            {{else}}
+                <div class="alert alert-danger" role="alert">
+                    {{.FlashMessage}}
+                </div>
+            {{end}}
+            {{end}}
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" class="form-control shadow" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" class="form-control shadow" name="password" required>
+            </div>
+
+            <div class="m-auto w-100 text-center">
+                <button type="submit" class=" w-75 p-2 mt-3 border-0 bg-dark rounded text-white">Login</button>
+            </div>
+        </form>
+
+        <div class="register text-center mt-3">
+            <p>No account yet?
+                <a href="/register">Register</a>
+            </p>
+        </div>
+
+    </section>
+
+    <!-- script js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</body>
+</html>
